@@ -22,10 +22,10 @@
     height: 40px;
 }
 
-.aside .option:hover {
+.aside .option:hover,
+.aside .selected {
     background: var(--primary-100);
     border-left: 4px solid var(--primary-400);
-    padding: 4px 16px;
     cursor: pointer;
 }
 
