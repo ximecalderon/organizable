@@ -19,6 +19,42 @@
   background-color: white;
 }
 
+.bg-green-100 {
+  background-color: var(--green-100);
+}
+
+.bg-green-200 {
+  background-color: var(--green-200);
+}
+
+.bg-melon {
+  background-color: var(--melon);
+}
+
+.bg-blue {
+  background-color: var(--blue);
+}
+
+.bg-orange {
+  background-color: var(--orange);
+}
+
+.bg-violet {
+  background-color: var(--violet);
+}
+
+.bg-pink {
+  background-color: var(--pink);
+}
+
+.bg-gray {
+  background-color: var(--gray);
+}
+
+.bg-cyan {
+  background-color: var(--cyan);
+}
+
 /* colors */
 .white {
   color: #fff;

@@ -1,8 +1,11 @@
 .aside {
-    border-top: 1px solid var(--grey-light);
+    background-color: white;
+    width: 240px;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: fixed;
 }
 
 .aside ul {
@@ -45,4 +48,3 @@
 .aside .icon {
     width: 18px;
 }
-  

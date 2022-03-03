@@ -1,0 +1,63 @@
+.content {
+    width: calc(100vw - 240px);
+    height: 100vh;
+    background-color: var(--gray-100);
+    position: absolute;
+    top: 0px;
+    left: 240px;
+    overflow-y: scroll;
+    padding: 48px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+.board-cards {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.board-card {
+    width: 190px;
+    height: 96px;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.board-card__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.board-card__button {
+    width: 24px;
+    height: 24px;
+    background-color: var(--white-transparent);
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.board-card__button:hover {
+    background-color: var(--secondary-400);
+}
+
+.board-card__button:hover svg path {
+    stroke: white;
+}
+
+.active svg path {
+    fill: #5C5C5C;
+}
+
+.active:hover svg path {
+    fill: white;
+}

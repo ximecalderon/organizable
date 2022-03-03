@@ -44,9 +44,6 @@
   margin: auto;
 }
 
-.main {
-  background: var(--black-light);
-  display: grid;
-  grid-template-columns: 256px 1fr;
-  min-height: 100vh;
+.main-body {
+  display: flex;
 }

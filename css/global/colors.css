@@ -22,6 +22,19 @@
   --error-400: #c51c3b;
   --error-500: #a11730;
 
+  --white-transparent: #FFFFFF40;
+  --black-transparent: #17171CCC;
+
+  --green-100: #90DBAF;
+  --melon: #F77474;
+  --blue: #60B5E5;
+  --orange: #FFA759;
+  --violet: #C499EC;
+  --pink: #FABBD0;
+  --gray: #BDBDBD;
+  --cyan: #9DE0F9;
+  --green-200: #42D781;
+
   --shadow-xs: 0px 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-sm: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);
   --shadow-md: 0px 4px 6px -1px rgba(0, 0, 0, 0.1),
