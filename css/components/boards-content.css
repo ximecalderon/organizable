@@ -109,6 +109,11 @@
     cursor: pointer;
 }
 
+.color-option:hover,
+.color-option .selected {
+    border: 2px solid white;
+}
+
 .popup {
     position: relative;
 }
