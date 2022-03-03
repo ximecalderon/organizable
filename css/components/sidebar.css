@@ -29,6 +29,10 @@
     cursor: pointer;
 }
 
+.aside .option:focus {
+    border-left: 2px solid var(--primary-300);
+}
+
 .aside .logo-container {
     height: 64px;
     display: flex;
