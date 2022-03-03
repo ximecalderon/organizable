@@ -1,3 +1,7 @@
+#root {
+  min-height: 100vh;
+}
+
 .section {
   padding: 64px 16px;
 }
@@ -38,4 +42,11 @@
 .container-xl {
   max-width: 1280px;
   margin: auto;
+}
+
+.main {
+  background: var(--black-light);
+  display: grid;
+  grid-template-columns: 256px 1fr;
+  min-height: 100vh;
 }
