@@ -2,6 +2,8 @@ import { appKey } from "./config.js";
 import DOMHandler from "./dom-handler.js";
 import STORE from "./store.js";
 
+export const root = document.querySelector("#root");
+
 export function fromLocalStorage(key) {
   const data = JSON.parse(localStorage.getItem(appKey)) || {};
   return data[key];

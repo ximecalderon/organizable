@@ -1,7 +1,7 @@
 import DOMHandler from "../dom-handler.js";
 import { input } from "../components/inputs.js";
 import { signup } from "../services/user-service.js";
-import { listenerRedirect } from "../utils.js";
+import { listenerRedirect, root } from "../utils.js";
 import LoginPage from "./login-page.js";
 import STORE from "../store.js";
 
@@ -87,8 +87,8 @@ function listenSignup() {
       };
 
       const user = await signup(data);
-      alert("Se creo " + user.id)
-      DOMHandler.load("#root", HomePage)
+
+      DOMHandler.load(HomePage, root)
     } catch (error) {
       SignupPage.state.signupError = error.message;
       DOMHandler.reload();

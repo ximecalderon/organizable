@@ -10,8 +10,8 @@ const ColorCode = {
   sky: "bg-cyan",
 };
 
-function renderOptions(condition) {
-  if (condition) {
+function renderOptions(board) {
+  if (board.closed) {
     return `
     <div class="board-card__button js-restore" data-id="${board.id}">
       <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -44,7 +44,7 @@ function renderBoard(board) {
   <div class="board-card ${ColorCode[board.color]}">
     <span>${board.name}</span>
     <div class="board-card__footer">
-      ${renderOptions(board.closed)}
+      ${renderOptions(board)}
     </div>
   </div>
   `

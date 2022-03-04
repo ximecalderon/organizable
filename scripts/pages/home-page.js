@@ -1,6 +1,7 @@
 import DOMHandler from "../dom-handler.js";
 import STORE from "../store.js";
 import { logout } from "../services/session-service.js";
+import { listenerRedirect, root } from "../utils.js";
 import LoginPage from "./login-page.js";
 import Sidebar from "../components/sidebar.js";
 import renderBoards from "../components/board.js";
@@ -30,6 +31,8 @@ function renderOthers(otherBoards) {
 };
 
 function render() {
+  STORE.setCurrentPage("home");
+  
   const boards = STORE.boards;
   const starredBoards = boards.filter(board => board.starred == true)
   const otherBoards = boards.filter(board => board.starred == false)

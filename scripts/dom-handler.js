@@ -1,13 +1,7 @@
-function selectParent(parentSelector) {
-  return document.querySelector(parentSelector)
-}
-
 const DOMHandler = {
   module: null,
   parent: null,
-  load(module, parentSelector) {
-    let parent = selectParent(parentSelector);
-
+  load(module, parent) {
     this.module = module;
     this.parent = parent;
     parent.innerHTML = module; //toString()

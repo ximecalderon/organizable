@@ -26,8 +26,6 @@ export default async function apiFetch(
     body: body ? JSON.stringify(body) : null,
   };
 
-
-
   const response = await fetch(BASE_URI + endpoint, config);
 
   let data;
@@ -39,7 +37,7 @@ export default async function apiFetch(
     }
     if (data.errors) throw new Error(JSON.stringify(data.errors));
     throw new Error(JSON.stringify(data))
-  }
+  };
 
   try {
     data = await response.json();

@@ -1,13 +1,21 @@
 import DOMHandler from "../dom-handler.js";
 import { input } from "../components/inputs.js";
 import { login } from "../services/session-service.js";
-import { listenerRedirect } from "../utils.js";
+import { listenerRedirect, root } from "../utils.js";
 import SignupPage from "./signup-page.js";
+import HomePage from "./home-page.js";
 import STORE from "../store.js";
 
-function render() {
-  const { loginError } = LoginPage.state;
+function displayErrors(errors) {
+  if (errors) {
+    return `<span class="input__error-message">${errors}</span>`
+  }
+  return ""
+};
 
+function render() {
+  const { errors } = LoginPage.state;
+  console.log(errors);
   return `
     <section class="section-full bg-gray-100">
       <div class="container flex flex-column gap-8 items-center">
@@ -34,7 +42,7 @@ function render() {
           <button type="submit" class="button button--secondary width-full">
             Login
           </button>
-          ${loginError ? '<span class="input__error-message">Error message</span>' : ''}
+          ${displayErrors(errors)}
         </form>
         <a href="" class="to-signup">Create Account</a>
       </div>
@@ -60,9 +68,10 @@ function listenLogin() {
       STORE.user = user;
 
       await STORE.fetchBoards();
-      DOMHandler.load("#root", HomePage);
+
+      DOMHandler.load(HomePage, root);
     } catch (error) {
-      LoginPage.state.loginError = error.message;
+      LoginPage.state.errors = error.message;
       DOMHandler.reload();
     }
   })
@@ -79,7 +88,7 @@ const LoginPage = {
   },
   title: "login",
   state: {
-    loginError: null,
+    errors: null,
   }
 }
 
