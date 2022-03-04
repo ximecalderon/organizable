@@ -2,6 +2,18 @@ import DOMHandler from "../dom-handler.js";
 import HomePage from "./home-page.js";
 import { root } from "../utils.js";
 
+function renderColorOption(colorClass) {
+  return `
+  <div class="color-option ${colorClass}"></div>
+  `
+};
+
+function renderColorOptions() {
+  const colorClasses = ["bg-green-100", "bg-melon", "bg-blue", "bg-orange", "bg-violet", "bg-pink", "bg-green-200", "bg-gray", "bg-cyan"];
+
+  return colorClasses.map(renderColorOption).join("")
+}
+
 function render() {
   return `
   <div class="board-edit-view">
@@ -23,15 +35,7 @@ function render() {
               </div>
           </div>
           <div class="palette__options">
-              <div class="color-option bg-green-100"></div>
-              <div class="color-option bg-melon"></div>
-              <div class="color-option bg-blue"></div>
-              <div class="color-option bg-orange"></div>
-              <div class="color-option bg-violet"></div>
-              <div class="color-option bg-pink"></div>
-              <div class="color-option bg-green-200"></div>
-              <div class="color-option bg-gray"></div>
-              <div class="color-option bg-cyan"></div>
+            ${renderColorOptions()}
           </div>
       </form>
       <img class="close" src="/assets/icons/close-white.svg" alt="close icon">
@@ -40,11 +44,38 @@ function render() {
   `
 };
 
+function listenSelectColor() {
+  const colors = document.querySelectorAll(".color-option");
+
+  colors.forEach(color => {
+    color.addEventListener("click", event => {
+      event.preventDefault();
+      const selectedColor = Array.from(colors).find(color => color.classList.contains("selected"));
+
+      if (selectedColor) {
+        selectedColor.classList.remove("selected");
+        event.target.classList.add("selected");
+      } else {
+        event.target.classList.add("selected");
+      }
+    })
+  })
+};
+
+// function listenSubmit() {
+//   const form = document.querySelector(".board-form__container");
+
+//   form.addEventListener("submit", event => {
+
+//   })
+// };
+
 function listenCancel() {
   const trigger = document.querySelector(".close");
 
   trigger.addEventListener("click", event => {
     event.preventDefault();
+
     DOMHandler.load(HomePage, root)
   })
 };
@@ -55,7 +86,8 @@ const CreateBoardPopup = {
     return render();
   },
   addListeners() {
-    listenCancel()
+    listenCancel();
+    listenSelectColor();
   },
   title: "create-board",
   state: {
