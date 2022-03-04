@@ -11,21 +11,18 @@ export function input({
 }) {
   return `
   <div class="input">
-    ${
-      label
-        ? `<label for="${id}" class="content-xs overline">${label}</label>`
-        : ""
+    ${label
+      ? `<label for="${id}" class="content-xs overline">${label}</label>`
+      : ""
     }
     <div class="input__container">
-      ${
-        icon
-          ? `<img
+      ${icon
+      ? `<img
           src="${icon}"
           alt=""
-          class="input__icon"
         />`
-          : ""
-      }
+      : ""
+    }
       <input
         type="${type ? type : "text"}"
         placeholder="${placeholder}"

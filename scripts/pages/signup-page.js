@@ -1,27 +1,67 @@
 import DOMHandler from "../dom-handler.js";
-// import { signup } from "../services/session-service.js";
+import { input } from "../components/inputs.js";
+import { signup } from "../services/user-service.js";
+import { listenerRedirect } from "../utils.js";
+import LoginPage from "./login-page.js";
+import STORE from "../store.js";
 
 function render() {
-  const { signupError } = SignupPage.state
+  const { errors } = SignupPage.state
 
   return `
-    <section>
-      <div class="header">
-        <h1>Create Account</h1>
-      </div>
-      <div class="container">
-        <form class="form signup-form">
-            <input type="text" id="username" name="username" required placeholder="username" />
-            <input type="text" id="email" name="email" required placeholder="email" />
-            <input type="text" id="first_name" name="first_name" required placeholder="first_name" />
-            <input type="text" id="last_name" name="last_name" required placeholder="last_name" />
-            <input type="password" id="password" name="password" required placeholder="password" />
-            ${signupError ? `<p> ${signupError}</p>` : ""}
-            <div class="footer-links">
-            <a href="" class="signup">Login</a>
-            <button class="button button--primary">Create account</button>
-            </div>
+    <section class="section-full bg-gray-100">
+      <div class="container flex flex-column gap-8 items-center">
+        <img src="/assets/images/logo.png" alt="rankable logo" />
+        <h1 class="heading">Create Account</h1>
+        <form action="" class="full-width container-sm flex flex-column gap-4 js-signup-form">
+          ${input({
+    label: "username",
+    id: "username",
+    name: "username",
+    placeholder: "username",
+    required: "required",
+    icon: "/assets/icons/user.svg",
+    error: errors.username
+  })}
+          ${input({
+    label: "email",
+    id: "email",
+    name: "email",
+    placeholder: "email@example.com",
+    required: "required",
+    icon: "/assets/icons/mail.svg",
+    error: errors.email
+  })}
+          ${input({
+    label: "first name",
+    id: "first-name",
+    name: "first-name",
+    placeholder: "First Name",
+    icon: "/assets/icons/data.svg",
+    error: errors.first_name
+  })}
+          ${input({
+    label: "last name",
+    id: "last-name",
+    name: "last-name",
+    placeholder: "Last Name",
+    icon: "/assets/icons/data.svg",
+    error: errors.last_name
+  })}
+          ${input({
+    label: "password",
+    id: "password",
+    name: "password",
+    placeholder: "*******",
+    required: "required",
+    icon: "/assets/icons/key.svg",
+    error: errors.password
+  })}
+          <button type="submit" class="button button--secondary width-full">
+            Create account
+          </button>
         </form>
+        <a href="" class="to-login">Login</a>
       </div>
     </section>
   `
@@ -29,7 +69,7 @@ function render() {
 
 // Creates functions for page listeners
 function listenSignup() {
-  const loginForm = document.querySelector(".signup-form");
+  const loginForm = document.querySelector(".js-signup-form");
 
   loginForm.addEventListener("submit", async (event) => {
     try {
@@ -61,9 +101,10 @@ const SignupPage = {
   },
   addListeners() {
     listenSignup();
+    listenerRedirect(".to-login", LoginPage);
   },
   state: {
-    signupError: null,
+    errors: {}
   }
 }
 

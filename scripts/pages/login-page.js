@@ -1,6 +1,7 @@
 import DOMHandler from "../dom-handler.js";
 import { input } from "../components/inputs.js";
 import { login } from "../services/session-service.js";
+import { listenerRedirect } from "../utils.js";
 import SignupPage from "./signup-page.js";
 import STORE from "../store.js";
 
@@ -67,19 +68,6 @@ function listenLogin() {
   })
 }
 
-function listenSignup() {
-  try {
-    const toSignupLink = document.querySelector(".to-signup");
-
-    toSignupLink.addEventListener("click", () => {
-      DOMHandler.load(SignupPage)
-    })
-
-  } catch (error) {
-    console.log(error.message)
-  }
-}
-
 // Creates object to export
 const LoginPage = {
   toString() {
@@ -87,7 +75,7 @@ const LoginPage = {
   },
   addListeners() {
     listenLogin();
-    listenSignup();
+    listenerRedirect(".to-signup", SignupPage);
   },
   state: {
     loginError: null,
