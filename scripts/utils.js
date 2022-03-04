@@ -22,7 +22,9 @@ export function listenerRedirect(triggerSelector, page, containerSelector = "#ro
     trigger.addEventListener("click", event => {
       event.preventDefault();
       STORE.setCurrentPage(page.title);
-      DOMHandler.load(page, containerSelector)
+
+      const container = document.querySelector(containerSelector);
+      DOMHandler.load(page, container)
     })
 
   } catch (error) {

@@ -1,5 +1,6 @@
 import { listenerRedirect } from "../utils.js";
 import STORE from "../store.js";
+import HomePage from "../pages/home-page.js";
 
 function renderOption({ id, title, icon }) {
   return `

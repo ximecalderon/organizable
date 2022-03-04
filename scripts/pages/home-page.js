@@ -3,6 +3,7 @@ import STORE from "../store.js";
 import { logout } from "../services/session-service.js";
 import { listenerRedirect, root } from "../utils.js";
 import LoginPage from "./login-page.js";
+import CreateBoardPopup from "./create-board.js";
 import Sidebar from "../components/sidebar.js";
 import renderBoards from "../components/board.js";
 
@@ -32,7 +33,7 @@ function renderOthers(otherBoards) {
 
 function render() {
   STORE.setCurrentPage("home");
-  
+
   const boards = STORE.boards;
   const starredBoards = boards.filter(board => board.starred == true)
   const otherBoards = boards.filter(board => board.starred == false)
@@ -49,13 +50,24 @@ function render() {
   `
 };
 
+function listenCreateBoard() {
+  const trigger = document.querySelector(".new-board")
+
+  trigger.addEventListener("click", event => {
+    event.preventDefault();
+    // STORE.setCurrentPage(CreateBoardPage.title);
+    DOMHandler.addChild(CreateBoardPopup, root)
+  })
+};
+
 // Creates object to export
 const HomePage = {
   toString() {
     return render();
   },
   addListeners() {
-    Sidebar.addListeners()
+    Sidebar.addListeners();
+    listenCreateBoard()
   },
   title: "home",
 };

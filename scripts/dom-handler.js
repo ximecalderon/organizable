@@ -7,6 +7,12 @@ const DOMHandler = {
     parent.innerHTML = module; //toString()
     module.addListeners();
   },
+  addChild(module, parent) {
+    this.module = module;
+    this.parent = parent;
+    parent.innerHTML += module;
+    module.addListeners();
+  },
   reload() {
     this.load(this.module, this.parent);
   },

@@ -68,6 +68,7 @@
 /* board creation or edit view */
 
 .board-edit-view {
+    position: absolute;
     height: 100vh;
     width: 100vw;
     background-color: var(--black-transparent);
