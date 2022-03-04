@@ -23,6 +23,7 @@ function render() {
     icon: "/assets/icons/user.svg",
   })}
                   ${input({
+    type: "password",
     label: "password",
     id: "password",
     name: "password",
@@ -59,8 +60,7 @@ function listenLogin() {
       STORE.user = user;
 
       await STORE.fetchBoards();
-      DOMHandler.load(HomePage);
-
+      DOMHandler.load("#root", HomePage);
     } catch (error) {
       LoginPage.state.loginError = error.message;
       DOMHandler.reload();

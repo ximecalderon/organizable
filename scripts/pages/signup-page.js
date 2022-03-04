@@ -88,7 +88,7 @@ function listenSignup() {
 
       const user = await signup(data);
       alert("Se creo " + user.id)
-
+      DOMHandler.load("#root", HomePage)
     } catch (error) {
       SignupPage.state.signupError = error.message;
       DOMHandler.reload();
