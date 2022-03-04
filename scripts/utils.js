@@ -1,5 +1,6 @@
 import { appKey } from "./config.js";
 import DOMHandler from "./dom-handler.js";
+import STORE from "./store.js";
 
 export function fromLocalStorage(key) {
   const data = JSON.parse(localStorage.getItem(appKey)) || {};
@@ -18,6 +19,7 @@ export function listenerRedirect(triggerSelector, page, containerSelector = "#ro
 
     trigger.addEventListener("click", event => {
       event.preventDefault();
+      STORE.setCurrentPage(page.title);
       DOMHandler.load(page, containerSelector)
     })
 

@@ -77,6 +77,7 @@ const LoginPage = {
     listenLogin();
     listenerRedirect(".to-signup", SignupPage);
   },
+  title: "login",
   state: {
     loginError: null,
   }

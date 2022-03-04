@@ -24,6 +24,7 @@ function render() {
     error: errors.username
   })}
           ${input({
+    type: "email",
     label: "email",
     id: "email",
     name: "email",
@@ -49,6 +50,7 @@ function render() {
     error: errors.last_name
   })}
           ${input({
+    type: "password",
     label: "password",
     id: "password",
     name: "password",
@@ -103,6 +105,7 @@ const SignupPage = {
     listenSignup();
     listenerRedirect(".to-login", LoginPage);
   },
+  title: "signup",
   state: {
     errors: {}
   }
