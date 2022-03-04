@@ -33,8 +33,8 @@ function renderOthers(otherBoards) {
 
 function render() {
   STORE.setCurrentPage("home");
-
   const boards = STORE.boards;
+
   const starredBoards = boards.filter(board => board.starred == true)
   const otherBoards = boards.filter(board => board.starred == false)
 

@@ -12,7 +12,7 @@ const router = {
   home: HomePage,
 };
 
-function App() {
+async function App() {
   const token = sessionStorage.getItem(tokenKey);
   let module;
 
@@ -25,10 +25,14 @@ function App() {
     return DOMHandler.load(module, root);
   }
 
-  module = router[STORE.currentPage];
-  return DOMHandler.load(module, root);
+  if (["home"].includes(STORE.currentPage)) {
+    await STORE.fetchBoards();
+    module = router[STORE.currentPage];
+
+    return DOMHandler.load(module, root);
+  }
 }
 
-App();
+await App();
 
 // DOMHandler.load(LoginPage, "#root");

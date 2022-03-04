@@ -42,8 +42,16 @@ export function radio({
   name,
   value,
   classList,
+  defaultInput = "",
 }) {
   return `
-    <input type="radio" id="${value}" name="${name}" value="${value}" class="${classList}">
+    <input 
+      type="radio" 
+      id="${value}" 
+      name="${name}" 
+      value="${value}" 
+      class="${classList}" 
+      ${defaultInput == value ? "checked='checked'" : ""}   
+    >
   `
 }

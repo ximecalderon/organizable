@@ -1,12 +1,13 @@
 import DOMHandler from "../dom-handler.js";
 import HomePage from "./home-page.js";
+import STORE from "../store.js";
 import { root, ColorCode } from "../utils.js";
 import { createBoard } from "../services/boards-service.js"
 import { radio } from "../components/inputs.js"
 
 function renderColorOptions() {
   return Object.keys(ColorCode).reduce((HTMLstring, color) => {
-    return HTMLstring + radio({ name: "color", value: color, classList: ColorCode[color]})
+    return HTMLstring + radio({ name: "color", value: color, classList: ColorCode[color], defaultInput: "lime" })
   }, "")
 }
 
@@ -15,7 +16,7 @@ function render() {
   <div class="board-edit-view">
   <div class="popup">
       <form class="board-form__container">
-          <div class="board-card bg-green-100">
+          <div id="js-new-board" class="board-card bg-green-100">
               <div class="board__input-container ">
                   <input
                       type="text"
@@ -40,29 +41,39 @@ function render() {
   `
 };
 
-// function listenSubmit() {
-//   const form = document.querySelector(".board-form__container");
+function listenColorSelected() {
+  const colorRadios = document.querySelectorAll("input[type='radio']");
 
-//   form.addEventListener("submit", async (event) => {
-//     let response;
-//     try {
-//       const { name, color } = event.target
+  colorRadios.forEach(colorRadio => {
+    colorRadio.addEventListener("change", () => {
+      const newBoardCard = document.getElementById("js-new-board");
+      newBoardCard.classList.replace(newBoardCard.classList.item(1), ColorCode[colorRadio.value])
+    })
+  })
+}
 
-//       const newBoard = {
-//         name: name.value,
-//         color: color.value ? color.value : "blue"
-//       }
+function listenSubmit() {
+  const form = document.querySelector(".board-form__container");
 
-//       response = await createBoard(newBoard);
-//       await STORE.fetchBoards();
-//       DOMHandler.load(HomePage, root)
-//     } catch (error) {
-//       error = JSON.parse(error.message);
-//       AddContactPage.state.errors = error;
-//       renderLayout(AddContactPage);
-//     };
-//   })
-// };
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    let response;
+    try {
+      const { name, color } = event.target
+
+      const newBoard = {
+        name: name.value,
+        color: color.value ? color.value : "blue"
+      }
+      response = await createBoard(newBoard);
+
+      await STORE.fetchBoards();
+      DOMHandler.load(HomePage, root)
+    } catch (error) {
+      console.log(error)
+    };
+  })
+};
 
 function listenCancel() {
   const trigger = document.querySelector(".close");
@@ -81,7 +92,8 @@ const CreateBoardPopup = {
   },
   addListeners() {
     listenCancel();
-
+    listenColorSelected();
+    listenSubmit();
   },
   title: "create-board",
   state: {
