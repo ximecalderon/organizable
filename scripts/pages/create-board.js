@@ -1,17 +1,13 @@
 import DOMHandler from "../dom-handler.js";
 import HomePage from "./home-page.js";
-import { root } from "../utils.js";
-
-function renderColorOption(colorClass) {
-  return `
-  <div class="color-option ${colorClass}"></div>
-  `
-};
+import { root, ColorCode } from "../utils.js";
+import { createBoard } from "../services/boards-service.js"
+import { radio } from "../components/inputs.js"
 
 function renderColorOptions() {
-  const colorClasses = ["bg-green-100", "bg-melon", "bg-blue", "bg-orange", "bg-violet", "bg-pink", "bg-green-200", "bg-gray", "bg-cyan"];
-
-  return colorClasses.map(renderColorOption).join("")
+  return Object.keys(ColorCode).reduce((HTMLstring, color) => {
+    return HTMLstring + radio({ name: "color", value: color, classList: ColorCode[color]})
+  }, "")
 }
 
 function render() {
@@ -44,29 +40,27 @@ function render() {
   `
 };
 
-function listenSelectColor() {
-  const colors = document.querySelectorAll(".color-option");
-
-  colors.forEach(color => {
-    color.addEventListener("click", event => {
-      event.preventDefault();
-      const selectedColor = Array.from(colors).find(color => color.classList.contains("selected"));
-
-      if (selectedColor) {
-        selectedColor.classList.remove("selected");
-        event.target.classList.add("selected");
-      } else {
-        event.target.classList.add("selected");
-      }
-    })
-  })
-};
-
 // function listenSubmit() {
 //   const form = document.querySelector(".board-form__container");
 
-//   form.addEventListener("submit", event => {
+//   form.addEventListener("submit", async (event) => {
+//     let response;
+//     try {
+//       const { name, color } = event.target
 
+//       const newBoard = {
+//         name: name.value,
+//         color: color.value ? color.value : "blue"
+//       }
+
+//       response = await createBoard(newBoard);
+//       await STORE.fetchBoards();
+//       DOMHandler.load(HomePage, root)
+//     } catch (error) {
+//       error = JSON.parse(error.message);
+//       AddContactPage.state.errors = error;
+//       renderLayout(AddContactPage);
+//     };
 //   })
 // };
 
@@ -87,7 +81,7 @@ const CreateBoardPopup = {
   },
   addListeners() {
     listenCancel();
-    listenSelectColor();
+
   },
   title: "create-board",
   state: {

@@ -31,3 +31,15 @@ export function listenerRedirect(triggerSelector, page, containerSelector = "#ro
     console.log(error.message)
   }
 }
+
+export const ColorCode = {
+  lime: "bg-green-100",
+  inferno: "bg-melon",
+  blue: "bg-blue",
+  orange: "bg-orange",
+  purple: "bg-violet",
+  pink: "bg-pink",
+  green: "bg-green-200",
+  gray: "bg-gray",
+  sky: "bg-cyan",
+};

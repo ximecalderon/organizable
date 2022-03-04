@@ -36,4 +36,14 @@ export function input({
     ${error ? `<span class="input__error-message">${error}</span>` : ""}
   </div>
   `;
+};
+
+export function radio({
+  name,
+  value,
+  classList,
+}) {
+  return `
+    <input type="radio" id="${value}" name="${name}" value="${value}" class="${classList}">
+  `
 }

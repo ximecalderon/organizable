@@ -1,14 +1,4 @@
-const ColorCode = {
-  lime: "bg-green-100",
-  inferno: "bg-melon",
-  blue: "bg-blue",
-  orange: "bg-range",
-  purple: "bg-green-100",
-  pink: "bg-pink",
-  green: "bg-green-200",
-  gray: "bg-gray",
-  sky: "bg-cyan",
-};
+import { ColorCode } from "../utils.js";
 
 function renderOptions(board) {
   if (board.closed) {
