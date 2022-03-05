@@ -1,12 +1,14 @@
 import DOMHandler from "../dom-handler.js";
 import STORE from "../store.js";
-import { input } from "../components/inputs.js";
-import { root, ColorCode, listenerRedirect } from "../utils.js";
+import { createList } from "../services/lists-services.js";
+import { renderNewListForm, renderLists } from "../components/lists.js";
+import { root, ColorCode, listenerRedirect, fromLocalStorage } from "../utils.js";
 import HomePage from "./home-page.js";
 
 function render() {
   STORE.setCurrentPage(ListsPage.title);
   const board = STORE.currentBoard;
+  const lists = board.lists;
 
   return `
   <header class="bg-gray-100 full-width flex justify-center p-y-3">
@@ -16,7 +18,11 @@ function render() {
     </div>
   </header>
   <section class="board-view ${ColorCode[board.color]}">
-    <p>hola desde el board ${board.id}</p>
+    <h1 class="heading">${board.name}</h1>
+    <div class="todo-lists">
+      ${renderLists(lists)}
+      ${renderNewListForm()}
+    </div>
   </section>
   `
 };
@@ -25,6 +31,25 @@ async function listeReturn() {
   await STORE.fetchBoards();
   listenerRedirect(".js-return", HomePage);
 };
+
+function listenNewList() {
+  const form = document.querySelector(".js-new-list");
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    try {
+      const { name } = event.target;
+
+      const boardId = fromLocalStorage("current-boardID")
+      const newList = { name: name.value }
+
+      await createList(boardId, newList);
+      DOMHandler.reload();
+    } catch (error) {
+      console.log(error)
+    }
+  })
+}
 
 // Creates object to export
 const ListsPage = {
