@@ -31,9 +31,9 @@ function renderOptions(board) {
 
 function renderBoard(board) {
   return `
-  <div class="board-card ${ColorCode[board.color]}">
-    <span>${board.name}</span>
-    <div class="board-card__footer">
+  <div class="js-board board-card ${ColorCode[board.color]}" data-id="${board.id}">
+    <span class="js-board">${board.name}</span>
+    <div class="board-card__footer js-board">
       ${renderOptions(board)}
     </div>
   </div>

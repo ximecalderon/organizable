@@ -5,6 +5,7 @@ import { updateBoard } from "../services/boards-service.js";
 import CreateBoardPopup from "./create-board.js";
 import Sidebar from "../components/sidebar.js";
 import renderBoards from "../components/board.js";
+import ListsPage from "../pages/lists-page.js";
 
 function renderStarred(starredBoards) {
   if (starredBoards.length != 0) {
@@ -90,6 +91,23 @@ function listenCloseBoard() {
   })
 };
 
+function listenGetBoard() {
+  const boards = document.querySelectorAll(".board-card");
+
+  boards.forEach(board => {
+    board.addEventListener("click", async (event) => {
+      event.preventDefault();
+
+      if (event.target.classList.contains("js-board")) {
+        const boardId = board.getAttribute('data-id');
+        STORE.setCurrentBoardId(boardId);
+        await STORE.fetchCurrentBoard();
+        DOMHandler.load(ListsPage, root)
+      }
+    })
+  })
+};
+
 // Creates object to export
 const HomePage = {
   toString() {
@@ -97,6 +115,7 @@ const HomePage = {
   },
   addListeners() {
     Sidebar.addListeners();
+    listenGetBoard();
     listenCreateBoard();
     listenCloseBoard();
     listenToggleFavorite();

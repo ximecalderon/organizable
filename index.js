@@ -5,6 +5,7 @@ import LoginPage from "./scripts/pages/login-page.js";
 import HomePage from "./scripts/pages/home-page.js";
 import ClosedBoardsPage from "./scripts/pages/closed-boards.js";
 import ProfilePage from "./scripts/pages/profile-page.js";
+import ListsPage from "./scripts/pages/lists-page.js";
 import DOMHandler from "./scripts/dom-handler.js";
 import STORE from "./scripts/store.js";
 
@@ -14,6 +15,7 @@ const router = {
   home: HomePage,
   closed_boards: ClosedBoardsPage,
   my_profile: ProfilePage,
+  lists_page: ListsPage,
 };
 
 async function App() {
@@ -26,12 +28,19 @@ async function App() {
     } else {
       module = LoginPage;
     }
-    return DOMHandler.load(module, root);
+  } else {
+    switch (STORE.currentPage) {
+      case ("home" || "closed_boards"):
+        await STORE.fetchBoards()
+        break;
+      case "my_profile":
+        await STORE.getCurrentUser();
+        break;
+      case "lists_page":
+        await STORE.fetchCurrentBoard();
+        break;
+    }
   }
-
-  if (["home", "closed_boards"].includes(STORE.currentPage)) await STORE.fetchBoards();
-
-  if (STORE.currentPage == "my_profile") await STORE.getCurrentUser();
 
   module = router[STORE.currentPage];
   return DOMHandler.load(module, root);

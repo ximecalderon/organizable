@@ -1,5 +1,5 @@
 import { fromLocalStorage, saveToLocalStorage } from "./utils.js";
-import { getBoards } from "./services/boards-service.js"
+import { getBoards, getBoard } from "./services/boards-service.js"
 import { getUser } from "./services/user-service.js"
 
 async function fetchBoards() {
@@ -7,10 +7,17 @@ async function fetchBoards() {
   this.boards = boards;
 };
 
+async function fetchCurrentBoard() {
+  const boardId = fromLocalStorage("current-boardID");
+
+  const currentBoard = await getBoard(boardId);
+  this.currentBoard = currentBoard;
+};
+
 async function getCurrentUser() {
   const userId = fromLocalStorage("user").id
   const user = await getUser(userId)
-  
+
   this.user = user
 };
 
@@ -20,6 +27,11 @@ const STORE = {
   getCurrentUser,
   // currentBoardId: null,
   boards: [],
+  currentBoard: null,
+  setCurrentBoardId(id) {
+    saveToLocalStorage("current-boardID", id)
+  },
+  fetchCurrentBoard,
   fetchBoards,
   setUser(user) {
     saveToLocalStorage("user", user)

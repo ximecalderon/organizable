@@ -97,7 +97,7 @@ function listenSignup() {
       DOMHandler.reload();
     }
   })
-}
+};
 
 // Creates object to export
 const SignupPage = {
