@@ -58,6 +58,23 @@ function listenCreateBoard() {
   })
 };
 
+function listenToggleFavorite() {
+  const triggers = document.querySelectorAll(".js-favorite")
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener("click", async (event) => {
+      event.preventDefault();
+      const boardId = trigger.getAttribute('data-id');
+      const favorite = trigger.getAttribute('data-favorite');
+
+      const updated = await updateBoard(boardId, { starred: (favorite == "true" ? false : true) });
+
+      await STORE.fetchBoards();
+      DOMHandler.reload();
+    })
+  })
+};
+
 function listenCloseBoard() {
   const triggers = document.querySelectorAll(".js-close")
 
@@ -71,7 +88,7 @@ function listenCloseBoard() {
       DOMHandler.reload();
     })
   })
-}
+};
 
 // Creates object to export
 const HomePage = {
@@ -81,7 +98,8 @@ const HomePage = {
   addListeners() {
     Sidebar.addListeners();
     listenCreateBoard();
-    listenCloseBoard()
+    listenCloseBoard();
+    listenToggleFavorite();
   },
   title: "home",
 };
