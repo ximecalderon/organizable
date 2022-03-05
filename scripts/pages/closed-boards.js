@@ -22,6 +22,21 @@ function render() {
   `
 };
 
+function listenRestore() {
+  const triggers = document.querySelectorAll(".js-restore")
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener("click", async (event) => {
+      event.preventDefault();
+      const boardId = trigger.getAttribute('data-id');
+
+      await updateBoard(boardId, { closed: false });
+      await STORE.fetchBoards();
+      DOMHandler.reload();
+    })
+  })
+};
+
 function listenDeleteBoard() {
   const triggers = document.querySelectorAll(".js-delete")
 
@@ -45,6 +60,7 @@ const ClosedBoardsPage = {
   addListeners() {
     Sidebar.addListeners();
     listenDeleteBoard();
+    listenRestore()
   },
   title: "closed_boards",
 };
