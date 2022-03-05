@@ -55,7 +55,6 @@ function listenCreateBoard() {
 
   trigger.addEventListener("click", event => {
     event.preventDefault();
-    // STORE.setCurrentPage(CreateBoardPage.title);
     DOMHandler.addChild(CreateBoardPopup, root)
   })
 };

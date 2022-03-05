@@ -1,6 +1,9 @@
 import { listenerRedirect } from "../utils.js";
+import { logout } from "../services/session-service.js";
 import STORE from "../store.js";
+import DOMHandler from "../dom-handler.js";
 import HomePage from "../pages/home-page.js";
+import LoginPage from "../pages/login-page.js";
 
 function renderOption({ id, title, icon }) {
   return `
@@ -24,7 +27,7 @@ function render() {
             ${renderOption({ id: "my-profile", title: "My Profile", icon: "/assets/icons/user.svg" })}
           </ul>
       </div>
-      <div class="option option-exit">
+      <div class="option option-exit js-logout">
           <img src="/assets/icons/exit.svg" alt="user-icon" class="icon">
           <span class="primary-500">Logout</span>
       </div>
@@ -32,12 +35,29 @@ function render() {
   `
 }
 
+function listenLogout() {
+  const trigger = document.querySelector(".js-logout");
+
+  trigger.addEventListener("click", async (event) => {
+    event.preventDefault();
+    try {
+      await logout();
+      STORE.user = null;
+
+      DOMHandler.load(LoginPage, root);
+    } catch (error) {
+      console.log(error);
+    }
+  })
+};
+
 // Creates object to export
 const Sidebar = {
   toString() {
     return render();
   },
   addListeners() {
+    listenLogout();
     listenerRedirect("#home", HomePage)
     // listenerRedirect("#closed-boards", ClosedBoardsPage)
     // listenerRedirect("#my-profile", ProfilePage)
