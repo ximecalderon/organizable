@@ -6,3 +6,8 @@ export async function signup(credentials = { username, email, first_name, last_n
   sessionStorage.setItem(tokenKey, token);
   return user;
 }
+
+export async function deleteUser(userId) {
+  await apiFetch("users/" + userId, { method: "DELETE" });
+  sessionStorage.removeItem(tokenKey);
+}

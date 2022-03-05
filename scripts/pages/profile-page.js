@@ -1,6 +1,10 @@
 import { input } from "../components/inputs.js";
 import Sidebar from "../components/sidebar.js";
 import STORE from "../store.js";
+import DOMHandler from "../dom-handler.js";
+import { root } from "../utils.js";
+import { deleteUser } from "../services/user-service.js";
+import LoginPage from "./login-page.js";
 
 function render() {
   STORE.setCurrentPage(ProfilePage.title);
@@ -54,13 +58,30 @@ function render() {
           <button type="submit" class="button button--primary width-full">
             Update Profile
           </button>
-          <button type="button" class="button button--secondary width-full">
+          <button type="button" class="js-delete-user button button--secondary width-full">
             Delete My Account
           </button>
         </form>
       </div>
     </div>
   `
+};
+
+function listenDeleteUser() {
+  const trigger = document.querySelector(".js-delete-user");
+
+  trigger.addEventListener("click", async (event) => {
+    event.preventDefault();
+    const userId = STORE.user.id;
+
+    const confirmation = confirm("\nThis is an irreversible action.\nAre you sure you want to continue?");
+
+    if (confirmation) {
+      await deleteUser(userId);
+      STORE.setUser(null);
+      DOMHandler.load(LoginPage, root);
+    }
+  })
 };
 
 // Creates object to export
@@ -70,7 +91,7 @@ const ProfilePage = {
   },
   addListeners() {
     Sidebar.addListeners();
-
+    listenDeleteUser();
   },
   title: "my_profile",
   state: {

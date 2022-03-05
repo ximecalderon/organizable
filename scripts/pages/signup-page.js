@@ -3,6 +3,7 @@ import { input } from "../components/inputs.js";
 import { signup } from "../services/user-service.js";
 import { listenerRedirect, root } from "../utils.js";
 import LoginPage from "./login-page.js";
+import HomePage from "./home-page.js";
 import STORE from "../store.js";
 
 function render() {
@@ -36,16 +37,16 @@ function render() {
   })}
           ${input({
     label: "first name",
-    id: "first-name",
-    name: "first-name",
+    id: "first_name",
+    name: "first_name",
     placeholder: "First Name",
     icon: "/assets/icons/data.svg",
     error: errors.first_name
   })}
           ${input({
     label: "last name",
-    id: "last-name",
-    name: "last-name",
+    id: "last_name",
+    name: "last_name",
     placeholder: "Last Name",
     icon: "/assets/icons/data.svg",
     error: errors.last_name
@@ -79,19 +80,20 @@ function listenSignup() {
       event.preventDefault();
       const { username, email, first_name, last_name, password } = event.target;
 
-      const data = {
+      const newUser = {
         username: username.value,
         email: email.value,
         first_name: first_name.value,
         last_name: last_name.value,
         password: password.value,
       };
-
-      const user = await signup(data);
+      const user = await signup(newUser);
+      STORE.setUser(user);
 
       DOMHandler.load(HomePage, root)
     } catch (error) {
-      SignupPage.state.signupError = error.message;
+      console.log(error)
+      SignupPage.state.errors = error.message;
       DOMHandler.reload();
     }
   })
