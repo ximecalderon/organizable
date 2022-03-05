@@ -3,20 +3,19 @@ import Sidebar from "../components/sidebar.js";
 import STORE from "../store.js";
 import DOMHandler from "../dom-handler.js";
 import { root } from "../utils.js";
-import { deleteUser } from "../services/user-service.js";
+import { updateUser, deleteUser } from "../services/user-service.js";
 import LoginPage from "./login-page.js";
 
 function render() {
   STORE.setCurrentPage(ProfilePage.title);
   const { errors } = ProfilePage.state;
   const user = STORE.user;
-
   return `
     ${Sidebar}
     <div id="main-content" class="flex flex-column gap-8">
       <h1 class="heading">My Profile</h1>
       <div class="container flex flex-column gap-8 items-center">
-        <form action="" class="full-width container-sm flex flex-column gap-4">
+        <form action="" class="js-update full-width container-sm flex flex-column gap-4">
           ${input({
     label: "username",
     id: "username",
@@ -39,21 +38,21 @@ function render() {
   })}
           ${input({
     label: "First name",
-    id: "first_name",
-    name: "first_name",
+    id: "firstName",
+    name: "firstName",
     placeholder: "First Name",
-    value: user.first_name,
+    value: user.firstName,
     icon: "/assets/icons/data.svg",
-    error: errors.first_name,
+    error: errors.firstName,
   })}
           ${input({
     label: "Last name",
-    id: "last_name",
-    name: "last_name",
+    id: "lastName",
+    name: "lastName",
     placeholder: "Last Name",
-    value: user.last_name,
+    value: user.lastName,
     icon: "/assets/icons/data.svg",
-    error: errors.last_name,
+    error: errors.lastName,
   })}
           <button type="submit" class="button button--primary width-full">
             Update Profile
@@ -65,6 +64,34 @@ function render() {
       </div>
     </div>
   `
+};
+
+function listenUpdateUser() {
+  const form = document.querySelector(".js-update");
+
+  form.addEventListener("submit", async (event) => {
+    try {
+      event.preventDefault();
+      const { username, email, first_name, last_name } = event.target;
+
+      const updatedData = {
+        username: username.value,
+        email: email.value,
+        first_name: firstName.value,
+        last_name: lastName.value,
+      };
+
+      const userId = STORE.user.id;
+      const updatedUser = await updateUser(userId, updatedData);
+
+      STORE.setUser(updatedUser);
+      DOMHandler.reload();
+    } catch (error) {
+      console.log(error)
+      ProfilePage.state.errors = error.message;
+      DOMHandler.reload();
+    }
+  })
 };
 
 function listenDeleteUser() {
@@ -91,6 +118,7 @@ const ProfilePage = {
   },
   addListeners() {
     Sidebar.addListeners();
+    listenUpdateUser();
     listenDeleteUser();
   },
   title: "my_profile",

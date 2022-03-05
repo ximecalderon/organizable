@@ -1,13 +1,16 @@
 import { fromLocalStorage, saveToLocalStorage } from "./utils.js";
 import { getBoards } from "./services/boards-service.js"
+import { getUser } from "./services/user-service.js"
 
 async function fetchBoards() {
   const boards = await getBoards();
   this.boards = boards;
 };
 
-function getCurrentUser() {
-  const user = fromLocalStorage("user")
+async function getCurrentUser() {
+  const userId = fromLocalStorage("user").id
+  const user = await getUser(userId)
+  
   this.user = user
 };
 

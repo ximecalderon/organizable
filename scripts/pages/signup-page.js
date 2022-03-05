@@ -37,19 +37,19 @@ function render() {
   })}
           ${input({
     label: "first name",
-    id: "first_name",
-    name: "first_name",
+    id: "firstName",
+    name: "firstName",
     placeholder: "First Name",
     icon: "/assets/icons/data.svg",
-    error: errors.first_name
+    error: errors.firstName
   })}
           ${input({
     label: "last name",
-    id: "last_name",
-    name: "last_name",
+    id: "lastName",
+    name: "lastName",
     placeholder: "Last Name",
     icon: "/assets/icons/data.svg",
-    error: errors.last_name
+    error: errors.lastName
   })}
           ${input({
     type: "password",
@@ -78,13 +78,13 @@ function listenSignup() {
   loginForm.addEventListener("submit", async (event) => {
     try {
       event.preventDefault();
-      const { username, email, first_name, last_name, password } = event.target;
+      const { username, email, firstName, lastName, password } = event.target;
 
       const newUser = {
         username: username.value,
         email: email.value,
-        first_name: first_name.value,
-        last_name: last_name.value,
+        first_name: firstName.value,
+        last_name: lastName.value,
         password: password.value,
       };
       const user = await signup(newUser);

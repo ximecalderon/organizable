@@ -31,7 +31,7 @@ async function App() {
 
   if (["home", "closed_boards"].includes(STORE.currentPage)) await STORE.fetchBoards();
 
-  if (STORE.currentPage == "my_profile") STORE.getCurrentUser();
+  if (STORE.currentPage == "my_profile") await STORE.getCurrentUser();
 
   module = router[STORE.currentPage];
   return DOMHandler.load(module, root);
