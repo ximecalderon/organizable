@@ -30,7 +30,7 @@ function renderList(list) {
   const cards = list.cards;
 
   return `
-    <div class="list" data-id="${list.id}">
+    <div class="list" data-id="${list.listId}">
       <div class="list__header">
         <h2 class="heading heading--xs">${list.name}</h2>
         <div class="flex gap-4">
