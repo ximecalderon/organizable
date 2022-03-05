@@ -26,7 +26,6 @@ export function listenerRedirect(triggerSelector, page, containerSelector = "#ro
       const container = document.querySelector(containerSelector);
       DOMHandler.load(page, container)
     })
-
   } catch (error) {
     console.log(error.message)
   }

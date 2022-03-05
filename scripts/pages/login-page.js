@@ -14,8 +14,9 @@ function displayErrors(errors) {
 };
 
 function render() {
+  STORE.setCurrentPage(LoginPage.title);
   const { errors } = LoginPage.state;
-  console.log(errors);
+
   return `
     <section class="section-full bg-gray-100">
       <div class="container flex flex-column gap-8 items-center">
@@ -65,7 +66,7 @@ function listenLogin() {
       };
 
       const user = await login(data);
-      STORE.user = user;
+      STORE.setUser(user);
 
       await STORE.fetchBoards();
 

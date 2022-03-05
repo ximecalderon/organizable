@@ -6,6 +6,7 @@ import LoginPage from "./login-page.js";
 import STORE from "../store.js";
 
 function render() {
+  STORE.setCurrentPage(SignupPage.title);
   const { errors } = SignupPage.state
 
   return `

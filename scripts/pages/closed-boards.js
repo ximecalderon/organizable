@@ -1,6 +1,5 @@
 import DOMHandler from "../dom-handler.js";
 import STORE from "../store.js";
-import { root } from "../utils.js";
 import { updateBoard, deleteBoard } from "../services/boards-service.js";
 import Sidebar from "../components/sidebar.js";
 import renderBoards from "../components/board.js";

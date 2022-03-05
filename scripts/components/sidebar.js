@@ -4,6 +4,7 @@ import STORE from "../store.js";
 import DOMHandler from "../dom-handler.js";
 import HomePage from "../pages/home-page.js";
 import ClosedBoardsPage from "../pages/closed-boards.js";
+import ProfilePage from "../pages/profile-page.js";
 import LoginPage from "../pages/login-page.js";
 
 function renderOption({ id, title, icon }) {
@@ -52,6 +53,21 @@ function listenLogout() {
   })
 };
 
+async function listenHome() {
+  await STORE.fetchBoards();
+  listenerRedirect("#home", HomePage);
+};
+
+async function listenClosedBoards() {
+  await STORE.fetchBoards();
+  listenerRedirect("#closed_boards", ClosedBoardsPage);
+};
+
+async function listenProfile() {
+  STORE.getCurrentUser();
+  listenerRedirect("#my_profile", ProfilePage)
+};
+
 // Creates object to export
 const Sidebar = {
   toString() {
@@ -59,9 +75,9 @@ const Sidebar = {
   },
   addListeners() {
     listenLogout();
-    listenerRedirect("#home", HomePage);
-    listenerRedirect("#closed_boards", ClosedBoardsPage);
-    // listenerRedirect("#my-profile", ProfilePage)
+    listenHome();
+    listenClosedBoards();
+    listenProfile();
   }
 }
 

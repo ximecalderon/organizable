@@ -4,6 +4,7 @@ import SignupPage from "./scripts/pages/signup-page.js";
 import LoginPage from "./scripts/pages/login-page.js";
 import HomePage from "./scripts/pages/home-page.js";
 import ClosedBoardsPage from "./scripts/pages/closed-boards.js";
+import ProfilePage from "./scripts/pages/profile-page.js";
 import DOMHandler from "./scripts/dom-handler.js";
 import STORE from "./scripts/store.js";
 
@@ -12,6 +13,7 @@ const router = {
   signup: SignupPage,
   home: HomePage,
   closed_boards: ClosedBoardsPage,
+  my_profile: ProfilePage,
 };
 
 async function App() {
@@ -27,12 +29,12 @@ async function App() {
     return DOMHandler.load(module, root);
   }
 
-  if (["home", "closed_boards"].includes(STORE.currentPage)) {
-    await STORE.fetchBoards();
-    module = router[STORE.currentPage];
+  if (["home", "closed_boards"].includes(STORE.currentPage)) await STORE.fetchBoards();
 
-    return DOMHandler.load(module, root);
-  }
+  if (STORE.currentPage == "my_profile") STORE.getCurrentUser();
+
+  module = router[STORE.currentPage];
+  return DOMHandler.load(module, root);
 }
 
 await App();
