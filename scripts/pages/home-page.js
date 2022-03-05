@@ -31,7 +31,7 @@ function renderOthers(otherBoards) {
 };
 
 function render() {
-  STORE.setCurrentPage("home");
+  STORE.setCurrentPage(HomePage.title);
   const boards = STORE.boards.filter(board => board.closed == false);
 
   const starredBoards = boards.filter(board => board.starred == true)

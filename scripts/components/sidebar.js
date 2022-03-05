@@ -3,6 +3,7 @@ import { logout } from "../services/session-service.js";
 import STORE from "../store.js";
 import DOMHandler from "../dom-handler.js";
 import HomePage from "../pages/home-page.js";
+import ClosedBoardsPage from "../pages/closed-boards.js";
 import LoginPage from "../pages/login-page.js";
 
 function renderOption({ id, title, icon }) {
@@ -23,8 +24,8 @@ function render() {
           </div>
           <ul>
             ${renderOption({ id: "home", title: "My Boards", icon: "/assets/icons/boards.svg" })}
-            ${renderOption({ id: "closed-boards", title: "Closed Boards", icon: "/assets/icons/box.svg" })}
-            ${renderOption({ id: "my-profile", title: "My Profile", icon: "/assets/icons/user.svg" })}
+            ${renderOption({ id: "closed_boards", title: "Closed Boards", icon: "/assets/icons/box.svg" })}
+            ${renderOption({ id: "my_profile", title: "My Profile", icon: "/assets/icons/user.svg" })}
           </ul>
       </div>
       <div class="option option-exit js-logout">
@@ -58,8 +59,8 @@ const Sidebar = {
   },
   addListeners() {
     listenLogout();
-    listenerRedirect("#home", HomePage)
-    // listenerRedirect("#closed-boards", ClosedBoardsPage)
+    listenerRedirect("#home", HomePage);
+    listenerRedirect("#closed_boards", ClosedBoardsPage);
     // listenerRedirect("#my-profile", ProfilePage)
   }
 }

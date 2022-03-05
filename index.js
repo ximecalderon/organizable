@@ -3,6 +3,7 @@ import { root } from "./scripts/utils.js";
 import SignupPage from "./scripts/pages/signup-page.js";
 import LoginPage from "./scripts/pages/login-page.js";
 import HomePage from "./scripts/pages/home-page.js";
+import ClosedBoardsPage from "./scripts/pages/closed-boards.js";
 import DOMHandler from "./scripts/dom-handler.js";
 import STORE from "./scripts/store.js";
 
@@ -10,6 +11,7 @@ const router = {
   login: LoginPage,
   signup: SignupPage,
   home: HomePage,
+  closed_boards: ClosedBoardsPage,
 };
 
 async function App() {
@@ -25,7 +27,7 @@ async function App() {
     return DOMHandler.load(module, root);
   }
 
-  if (["home"].includes(STORE.currentPage)) {
+  if (["home", "closed_boards"].includes(STORE.currentPage)) {
     await STORE.fetchBoards();
     module = router[STORE.currentPage];
 
