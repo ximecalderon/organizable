@@ -1,8 +1,7 @@
 import DOMHandler from "../dom-handler.js";
 import STORE from "../store.js";
-import { logout } from "../services/session-service.js";
-import { listenerRedirect, root } from "../utils.js";
-import LoginPage from "./login-page.js";
+import { root } from "../utils.js";
+import { updateBoard } from "../services/boards-service.js";
 import CreateBoardPopup from "./create-board.js";
 import Sidebar from "../components/sidebar.js";
 import renderBoards from "../components/board.js";
@@ -33,7 +32,7 @@ function renderOthers(otherBoards) {
 
 function render() {
   STORE.setCurrentPage("home");
-  const boards = STORE.boards;
+  const boards = STORE.boards.filter(board => board.closed == false);
 
   const starredBoards = boards.filter(board => board.starred == true)
   const otherBoards = boards.filter(board => board.starred == false)
@@ -59,6 +58,21 @@ function listenCreateBoard() {
   })
 };
 
+function listenCloseBoard() {
+  const triggers = document.querySelectorAll(".js-close")
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener("click", async (event) => {
+      event.preventDefault();
+      const boardId = trigger.getAttribute('data-id');
+
+      await updateBoard(boardId, { closed: true });
+      await STORE.fetchBoards();
+      DOMHandler.reload();
+    })
+  })
+}
+
 // Creates object to export
 const HomePage = {
   toString() {
@@ -66,7 +80,8 @@ const HomePage = {
   },
   addListeners() {
     Sidebar.addListeners();
-    listenCreateBoard()
+    listenCreateBoard();
+    listenCloseBoard()
   },
   title: "home",
 };
