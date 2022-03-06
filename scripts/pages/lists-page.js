@@ -4,7 +4,7 @@ import { createList, deleteList } from "../services/lists-services.js";
 import { createCard, deleteCard } from "../services/cards-service.js";
 import { renderNewListForm, renderLists } from "../components/list-utils.js";
 import ListEditMode from "../components/list-edit-mode.js";
-import { root, ColorCode, listenerRedirect, fromLocalStorage } from "../utils.js";
+import { ColorCode, listenerRedirect, fromLocalStorage } from "../utils.js";
 import HomePage from "./home-page.js";
 
 function render() {
@@ -90,6 +90,24 @@ function listenDeleteList() {
   })
 };
 
+function listenCreateCard() {
+  const forms = document.querySelectorAll(".js-new-card");
+
+  forms.forEach(form => {
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const { name } = event.target
+      const newCard = { name: name.value }
+      const listId = event.target.closest(".list").getAttribute("data-id");
+
+      await createCard(listId, newCard);
+      await STORE.fetchCurrentBoard();
+      DOMHandler.reload();
+    })
+  })
+};
+
 function listenDeleteCard() {
   const triggers = document.querySelectorAll(".js-card-delete");
 
@@ -105,7 +123,7 @@ function listenDeleteCard() {
       DOMHandler.reload();
     })
   })
-}
+};
 
 // Creates object to export
 const ListsPage = {
@@ -117,6 +135,7 @@ const ListsPage = {
     listenNewList();
     listenEditList();
     listenDeleteList();
+    listenCreateCard();
     listenDeleteCard();
   },
   title: "lists_page",

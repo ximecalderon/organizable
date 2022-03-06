@@ -19,8 +19,10 @@ export function renderCards(cards) {
 
 export function renderNewCardForm() {
   return `
-  <form action="" class="card-form">
+  <form action="" class="card-form js-new-card">
     <input
+      id="name"
+      name="name"
       type="text"
       class="card-form__input"
       placeholder="new card"
