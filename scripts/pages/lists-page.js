@@ -2,6 +2,7 @@ import DOMHandler from "../dom-handler.js";
 import STORE from "../store.js";
 import { createList, deleteList } from "../services/lists-services.js";
 import { renderNewListForm, renderLists } from "../components/lists.js";
+import ListEditMode from "../components/list-edit-mode.js";
 import { root, ColorCode, listenerRedirect, fromLocalStorage } from "../utils.js";
 import HomePage from "./home-page.js";
 
@@ -51,7 +52,22 @@ function listenNewList() {
       console.log(error)
     }
   })
-}
+};
+
+function listenEditList() {
+  const triggers = document.querySelectorAll(".js-list-edit");
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener("click", async (event) => {
+      event.preventDefault();
+      const listId = event.target.getAttribute("data-id");
+      const header = document.getElementById(`list-${listId}`)
+
+      STORE.setCurrentList(listId);
+      DOMHandler.load(ListEditMode, header)
+    })
+  })
+};
 
 function listenDeleteList() {
   const triggers = document.querySelectorAll(".js-list-delete");
@@ -81,6 +97,7 @@ const ListsPage = {
   addListeners() {
     listeReturn();
     listenNewList();
+    listenEditList();
     listenDeleteList();
   },
   title: "lists_page",

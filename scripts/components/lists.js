@@ -29,17 +29,22 @@ export function renderNewListForm() {
   `
 };
 
+export function listHeader(list) {
+  return `
+  <h2 class="heading heading--xs">${list.name}</h2>
+  <div class="flex gap-4">
+    <img src="/assets/icons/edit.svg" alt="edit" class="js-list-edit" data-id="${list.listId}"/>
+    <img src="/assets/icons/trash.svg" alt="trash" class="js-list-delete" data-id="${list.listId}" />
+  </div>`
+};
+
 function renderList(list) {
   const cards = list.cards;
 
   return `
     <div class="list" data-id="${list.listId}">
-      <div class="list__header">
-        <h2 class="heading heading--xs">${list.name}</h2>
-        <div class="flex gap-4">
-          <img src="/assets/icons/edit.svg" alt="edit" class="js-list-edit" data-id="${list.listId}"/>
-          <img src="/assets/icons/trash.svg" alt="trash" class="js-list-delete" data-id="${list.listId}" />
-        </div>
+      <div id="list-${list.listId}" class="list__header">
+        ${listHeader(list)}
       </div>
       <hr class="full-width m-0" />
       ${renderCards(cards)}

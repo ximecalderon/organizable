@@ -37,6 +37,11 @@ const STORE = {
     saveToLocalStorage("user", user)
     this.user = user;
   },
+  currentList: null,
+  setCurrentList(id) {
+    const list = this.currentBoard.lists.find(list => list.listId == id)
+    this.currentList = list;
+  },
   setCurrentPage(page) {
     saveToLocalStorage("current-page", page);
     this.currentPage = page;
