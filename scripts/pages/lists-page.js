@@ -1,6 +1,6 @@
 import DOMHandler from "../dom-handler.js";
 import STORE from "../store.js";
-import { createList } from "../services/lists-services.js";
+import { createList, deleteList } from "../services/lists-services.js";
 import { renderNewListForm, renderLists } from "../components/lists.js";
 import { root, ColorCode, listenerRedirect, fromLocalStorage } from "../utils.js";
 import HomePage from "./home-page.js";
@@ -39,17 +39,39 @@ function listenNewList() {
     event.preventDefault();
     try {
       const { name } = event.target;
+      const listPos = STORE.currentBoard.lists.length;
+      const boardId = fromLocalStorage("current-boardID");
 
-      const boardId = fromLocalStorage("current-boardID")
-      const newList = { name: name.value }
+      const newList = { name: name.value, pos: listPos };
 
       await createList(boardId, newList);
+      await STORE.fetchCurrentBoard();
       DOMHandler.reload();
     } catch (error) {
       console.log(error)
     }
   })
 }
+
+function listenDeleteList() {
+  const triggers = document.querySelectorAll(".js-list-delete");
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener("click", async (event) => {
+      event.preventDefault();
+      try {
+        const boardId = fromLocalStorage("current-boardID");
+        const listId = event.target.getAttribute("data-id");
+
+        await deleteList(boardId, listId);
+        await STORE.fetchCurrentBoard();
+        DOMHandler.reload();
+      } catch (error) {
+        console.log(error)
+      }
+    })
+  })
+};
 
 // Creates object to export
 const ListsPage = {
@@ -58,6 +80,8 @@ const ListsPage = {
   },
   addListeners() {
     listeReturn();
+    listenNewList();
+    listenDeleteList();
   },
   title: "lists_page",
 };

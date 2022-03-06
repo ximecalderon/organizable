@@ -2,13 +2,16 @@ import { renderCards, renderNewCardForm } from "./card.js";
 
 export function renderNewListForm() {
   return `
-    <div class="list" data-id="list-todo">
+    <div class="list">
     <div class="list__header">
       <form action="" class="card-form js-new-list">
         <input
           type="text"
+          id="name"
+          name="name"
           class="card-form__input"
           placeholder="new list"
+          required="required"
         />
         <button 
           type="submit"
@@ -34,8 +37,8 @@ function renderList(list) {
       <div class="list__header">
         <h2 class="heading heading--xs">${list.name}</h2>
         <div class="flex gap-4">
-          <img src="/assets/icons/edit.svg" alt="edit" />
-          <img src="/assets/icons/trash.svg" alt="trash" />
+          <img src="/assets/icons/edit.svg" alt="edit" class="js-list-edit" data-id="${list.listId}"/>
+          <img src="/assets/icons/trash.svg" alt="trash" class="js-list-delete" data-id="${list.listId}" />
         </div>
       </div>
       <hr class="full-width m-0" />
