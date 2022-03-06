@@ -2,7 +2,7 @@ function renderCard(card) {
   return `
   <div class="card" data-id="${card.cardId}">
     <p>${card.name}</p>
-    <img src="/assets/icons/trash.svg" alt="trash" />
+    <img src="/assets/icons/trash.svg" alt="trash" class="js-card-delete" data-id="${card.cardId}"/>
   </div>
   `
 }

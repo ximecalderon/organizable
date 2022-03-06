@@ -1,4 +1,4 @@
-import { renderCards, renderNewCardForm } from "./card.js";
+import { renderCards, renderNewCardForm } from "./card-utils.js";
 
 export function renderNewListForm() {
   return `

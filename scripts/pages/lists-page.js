@@ -1,7 +1,8 @@
 import DOMHandler from "../dom-handler.js";
 import STORE from "../store.js";
 import { createList, deleteList } from "../services/lists-services.js";
-import { renderNewListForm, renderLists } from "../components/lists.js";
+import { createCard, deleteCard } from "../services/cards-service.js";
+import { renderNewListForm, renderLists } from "../components/list-utils.js";
 import ListEditMode from "../components/list-edit-mode.js";
 import { root, ColorCode, listenerRedirect, fromLocalStorage } from "../utils.js";
 import HomePage from "./home-page.js";
@@ -89,6 +90,23 @@ function listenDeleteList() {
   })
 };
 
+function listenDeleteCard() {
+  const triggers = document.querySelectorAll(".js-card-delete");
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener("click", async (event) => {
+      event.preventDefault();
+
+      const listId = event.target.closest(".list").getAttribute("data-id");
+      const cardId = event.target.getAttribute("data-id");
+
+      await deleteCard(listId, cardId);
+      await STORE.fetchCurrentBoard();
+      DOMHandler.reload();
+    })
+  })
+}
+
 // Creates object to export
 const ListsPage = {
   toString() {
@@ -99,6 +117,7 @@ const ListsPage = {
     listenNewList();
     listenEditList();
     listenDeleteList();
+    listenDeleteCard();
   },
   title: "lists_page",
 };
