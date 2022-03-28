@@ -42,7 +42,7 @@ function renderList(list) {
   const cards = list.cards;
 
   return `
-    <div class="list" data-id="${list.listId}">
+    <div class="list js-list" data-id="${list.listId}" draggable="true">
       <div id="list-${list.listId}" class="list__header">
         ${listHeader(list)}
       </div>

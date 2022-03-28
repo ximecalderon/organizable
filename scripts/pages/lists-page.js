@@ -125,6 +125,41 @@ function listenDeleteCard() {
   })
 };
 
+function listenDragLists() {
+  const lists = document.querySelectorAll(".js-list");
+
+  lists.forEach(list => {
+    list.addEventListener("dragstart", event => {
+      event.target.classList.add("drag");
+      setTimeout(() => (event.target.classList.add("drag-leave")), 0);
+    });
+    list.addEventListener("dragend", event => {
+      event.target.classList.remove("drag", "drag-leave");
+    });
+    list.addEventListener("dragover", event => {
+      event.preventDefault();
+      console.log("dragover")
+    })
+    list.addEventListener("dragenter", event => {
+      const container = event.target.closest(".js-list");
+      if (!container) return;
+
+      container.classList.add("drag-over");
+    })
+    list.addEventListener("dragleave", event => {
+      console.log("dragleave")
+      event.target.classList.remove("drag-over")
+    })
+    list.addEventListener("drop", event => {
+      const newPos = event.target;
+      newPos.classList.remove("drag-over");
+      const prevPos = document.querySelector(".drag");
+
+      [newPos.innerHTML, prevPos.innerHTML] = [prevPos.innerHTML, newPos.innerHTML]
+    })
+  })
+};
+
 // Creates object to export
 const ListsPage = {
   toString() {
@@ -132,9 +167,12 @@ const ListsPage = {
   },
   addListeners() {
     listeReturn();
+
     listenNewList();
     listenEditList();
     listenDeleteList();
+    listenDragLists();
+
     listenCreateCard();
     listenDeleteCard();
   },

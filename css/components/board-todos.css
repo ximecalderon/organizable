@@ -79,3 +79,20 @@ flex-shrink: 0;
     cursor: pointer;
 }
   
+/* draggable classes */
+
+.js-list {
+    cursor:pointer;
+}
+
+.drag-leave {
+    opacity: 0;
+}
+
+.drag-over {
+    border: 2px dotted black;
+}
+
+.drag {
+    
+}

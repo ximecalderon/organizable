@@ -44,8 +44,7 @@ function listenLogout() {
     event.preventDefault();
     try {
       await logout();
-      STORE.user = null;
-
+      
       DOMHandler.load(LoginPage, root);
     } catch (error) {
       console.log(error);
