@@ -21,16 +21,16 @@ function render() {
     <aside class="aside">
       <div>
           <div class="logo-container">
-              <img src="/assets/images/logo.png" alt="organizable-logo" class="logo">
+              <img src="assets/images/logo.png" alt="organizable-logo" class="logo">
           </div>
           <ul>
-            ${renderOption({ id: "home", title: "My Boards", icon: "/assets/icons/boards.svg" })}
-            ${renderOption({ id: "closed_boards", title: "Closed Boards", icon: "/assets/icons/box.svg" })}
-            ${renderOption({ id: "my_profile", title: "My Profile", icon: "/assets/icons/user.svg" })}
+            ${renderOption({ id: "home", title: "My Boards", icon: "assets/icons/boards.svg" })}
+            ${renderOption({ id: "closed_boards", title: "Closed Boards", icon: "assets/icons/box.svg" })}
+            ${renderOption({ id: "my_profile", title: "My Profile", icon: "assets/icons/user.svg" })}
           </ul>
       </div>
       <div class="option option-exit js-logout">
-          <img src="/assets/icons/exit.svg" alt="user-icon" class="icon">
+          <img src="assets/icons/exit.svg" alt="user-icon" class="icon">
           <span class="primary-500">Logout</span>
       </div>
     </aside>

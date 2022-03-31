@@ -13,7 +13,7 @@ function render() {
   return `
     <section class="section-full bg-gray-100">
       <div class="container flex flex-column gap-8 items-center">
-        <img src="/assets/images/logo.png" alt="rankable logo" />
+        <img src="assets/images/logo.png" alt="rankable logo" />
         <h1 class="heading">Create Account</h1>
         <form action="" class="full-width container-sm flex flex-column gap-4 js-signup-form">
           ${input({
@@ -22,7 +22,7 @@ function render() {
     name: "username",
     placeholder: "username",
     required: "required",
-    icon: "/assets/icons/user.svg",
+    icon: "assets/icons/user.svg",
     error: errors.username
   })}
           ${input({
@@ -32,7 +32,7 @@ function render() {
     name: "email",
     placeholder: "email@example.com",
     required: "required",
-    icon: "/assets/icons/mail.svg",
+    icon: "assets/icons/mail.svg",
     error: errors.email
   })}
           ${input({
@@ -40,7 +40,7 @@ function render() {
     id: "firstName",
     name: "firstName",
     placeholder: "First Name",
-    icon: "/assets/icons/data.svg",
+    icon: "assets/icons/data.svg",
     error: errors.firstName
   })}
           ${input({
@@ -48,7 +48,7 @@ function render() {
     id: "lastName",
     name: "lastName",
     placeholder: "Last Name",
-    icon: "/assets/icons/data.svg",
+    icon: "assets/icons/data.svg",
     error: errors.lastName
   })}
           ${input({
@@ -58,7 +58,7 @@ function render() {
     name: "password",
     placeholder: "*******",
     required: "required",
-    icon: "/assets/icons/key.svg",
+    icon: "assets/icons/key.svg",
     error: errors.password
   })}
           <button type="submit" class="button button--secondary width-full">

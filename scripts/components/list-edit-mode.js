@@ -21,7 +21,7 @@ function render() {
         type="submit" class="button button--secondary button--sm button--only-icon"
       >
         <img
-          src="/assets/icons/tick.svg"
+          src="assets/icons/tick.svg"
           alt="add icon"
           class="button__icon"
         />
@@ -30,7 +30,7 @@ function render() {
         class="button button--subtle-2 button--sm button--only-icon js-cancel"
       >
         <img
-          src="/assets/icons/cross.svg"
+          src="assets/icons/cross.svg"
           alt="add icon"
           class="button__icon"
         />

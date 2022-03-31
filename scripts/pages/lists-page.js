@@ -15,8 +15,8 @@ function render() {
   return `
   <header class="bg-gray-100 full-width flex justify-center p-y-3">
     <div class="flex justify-center gap-4 js-return">
-      <img src="/assets/icons/arrow.svg" alt="">
-      <img src="/assets/images/logo.png" alt="organizable logo" />
+      <img src="assets/icons/arrow.svg" alt="">
+      <img src="assets/images/logo.png" alt="organizable logo" />
     </div>
   </header>
   <section class="board-view ${ColorCode[board.color]}">

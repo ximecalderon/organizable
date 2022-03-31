@@ -18,7 +18,7 @@ export function renderNewListForm() {
           class="button button--secondary button--sm button--only-icon"
         >
           <img
-            src="/assets/icons/add.svg"
+            src="assets/icons/add.svg"
             alt="add icon"
             class="button__icon"
           />
@@ -33,8 +33,8 @@ export function listHeader(list) {
   return `
   <h2 class="heading heading--xs">${list.name}</h2>
   <div class="flex gap-4">
-    <img src="/assets/icons/edit.svg" alt="edit" class="js-list-edit" data-id="${list.listId}"/>
-    <img src="/assets/icons/trash.svg" alt="trash" class="js-list-delete" data-id="${list.listId}" />
+    <img src="assets/icons/edit.svg" alt="edit" class="js-list-edit" data-id="${list.listId}"/>
+    <img src="assets/icons/trash.svg" alt="trash" class="js-list-delete" data-id="${list.listId}" />
   </div>`
 };
 

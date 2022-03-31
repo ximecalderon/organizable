@@ -23,7 +23,7 @@ function render() {
     placeholder: "username",
     required: "required",
     value: user.username,
-    icon: "/assets/icons/user.svg",
+    icon: "assets/icons/user.svg",
     error: errors.username,
   })}
           ${input({
@@ -33,7 +33,7 @@ function render() {
     placeholder: "email@example.com",
     required: "required",
     value: user.email,
-    icon: "/assets/icons/mail.svg",
+    icon: "assets/icons/mail.svg",
     error: errors.mail,
   })}
           ${input({
@@ -42,7 +42,7 @@ function render() {
     name: "firstName",
     placeholder: "First Name",
     value: user.firstName,
-    icon: "/assets/icons/data.svg",
+    icon: "assets/icons/data.svg",
     error: errors.firstName,
   })}
           ${input({
@@ -51,7 +51,7 @@ function render() {
     name: "lastName",
     placeholder: "Last Name",
     value: user.lastName,
-    icon: "/assets/icons/data.svg",
+    icon: "assets/icons/data.svg",
     error: errors.lastName,
   })}
           <button type="submit" class="button button--primary width-full">

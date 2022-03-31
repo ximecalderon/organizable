@@ -35,7 +35,7 @@ function render() {
             ${renderColorOptions()}
           </div>
       </form>
-      <img class="close" src="/assets/icons/close-white.svg" alt="close icon">
+      <img class="close" src="assets/icons/close-white.svg" alt="close icon">
   </div>
 </div>
   `

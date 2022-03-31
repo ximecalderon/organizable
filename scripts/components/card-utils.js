@@ -2,7 +2,7 @@ function renderCard(card) {
   return `
   <div class="card" data-id="${card.cardId}">
     <p>${card.name}</p>
-    <img src="/assets/icons/trash.svg" alt="trash" class="js-card-delete" data-id="${card.cardId}"/>
+    <img src="assets/icons/trash.svg" alt="trash" class="js-card-delete" data-id="${card.cardId}"/>
   </div>
   `
 }
@@ -31,7 +31,7 @@ export function renderNewCardForm() {
       class="button button--secondary button--sm button--only-icon"
     >
       <img
-        src="/assets/icons/add.svg"
+        src="assets/icons/add.svg"
         alt="add icon"
         class="button__icon"
       />

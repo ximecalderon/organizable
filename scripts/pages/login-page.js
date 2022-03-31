@@ -20,7 +20,7 @@ function render() {
   return `
     <section class="section-full bg-gray-100">
       <div class="container flex flex-column gap-8 items-center">
-        <img src="/assets/images/logo.png" alt="rankable logo" />
+        <img src="assets/images/logo.png" alt="organizable logo" />
         <h1 class="heading">Login</h1>
         <form action="" class="full-width container-sm flex flex-column gap-4 js-login-form">
           ${input({
@@ -29,7 +29,7 @@ function render() {
     name: "username",
     placeholder: "username",
     required: "required",
-    icon: "/assets/icons/user.svg",
+    icon: "assets/icons/user.svg",
   })}
                   ${input({
     type: "password",
@@ -38,7 +38,7 @@ function render() {
     name: "password",
     placeholder: "******",
     required: "required",
-    icon: "/assets/icons/key.svg",
+    icon: "assets/icons/key.svg",
   })}
           <button type="submit" class="button button--secondary width-full">
             Login
