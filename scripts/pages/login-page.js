@@ -72,7 +72,8 @@ function listenLogin() {
 
       DOMHandler.load(HomePage, root);
     } catch (error) {
-      LoginPage.state.errors = error.message;
+      const response = JSON.parse(error.message);
+      LoginPage.state.errors = response.message;
       DOMHandler.reload();
     }
   })

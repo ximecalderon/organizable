@@ -93,7 +93,7 @@ function listenSignup() {
       DOMHandler.load(HomePage, root)
     } catch (error) {
       console.log(error)
-      SignupPage.state.errors = error.message;
+      SignupPage.state.errors = JSON.parse(error.message);
       DOMHandler.reload();
     }
   })
